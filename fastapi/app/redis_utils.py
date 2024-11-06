@@ -16,3 +16,10 @@ class RedisStream:
             {"id": msg[0], "message": msg[1]} for _, msgs in messages for msg in msgs
         ]
         return formatted_messages
+
+    def blocking_read_from_stream(self, last_id: str) -> List[Dict[str, str]]:
+        messages = self.client.xread({self.stream_name: last_id}, block=1000)
+        formatted_messages = [
+            {"id": msg[0], "message": msg[1]} for _, msgs in messages for msg in msgs
+        ]
+        return formatted_messages

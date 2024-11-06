@@ -11,7 +11,7 @@ services:
   fastapi:
     build: ./fastapi
     ports:
-      - "8800:8000"
+      - "8000:8000"
     depends_on:
       - redis
     environment:
